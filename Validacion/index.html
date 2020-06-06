@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Validación de Formulario</title>
+    </head>
+
+    <body>
+        <h1>Validar Formulario</h1>
+
+
+        <form method="POST" action="ProcesarFormulario.php">
+           
+            Nombre:
+            <label for="Nombre"></label><br/>
+            <input type="text" name="Nombre"   autofocus="autofocus"><br/>
+            
+            Apellido:
+            <label for="Apellido"></label><br/>
+            <input type="text" name="Apellido"  ><br/>   
+
+            Edad:
+            <label for="Edad"></label><br/>
+            <input type="number" name="Edad" ><br/>   
+            
+            Email:
+            <label for="Email"></label><br/>
+            <input type="email" name="Email" ><br/>   
+
+            Contraseña:
+            <label for="Pass"></label><br/>
+            <input type="password" name="Pass" ><br/>   
+
+            <p><input type="submit" value="Enviar Formulario"><br/></p>   
+
+        </form>
+
+        <?php 
+
+            session_start();
+            
+            
+            if(isset($_GET['Error']))
+            {
+                $ExistenciaError= $_GET['Error'];
+                $TipoE= $_GET['Proceso'];
+                
+                if($ExistenciaError == false)
+                { 
+                    echo '<strong style= "color:green"> Formulario enviado Correctamente! </strong>';  
+                }
+                else
+                {
+                    if($TipoE=="FaltanDatos"){
+                        echo '<strong style= "color:red"> Faltan datos del formulario por llenar</strong>'.'<br/>';                    
+                    }
+                    if($TipoE == 'Nombre'){
+                        echo "Error en el nombre";
+                    }
+                    if($TipoE == 'Apellido'){
+                        echo '<strong>'."Error en el Apellido".'</strong>';
+                    }
+                    if($TipoE == 'Edad'){
+                        echo "Error en la Edad".'</strong>';
+                    }
+                    if($TipoE == 'Email'){
+                        echo "Error en el Email".'</strong>';
+                    }
+                    if($TipoE == 'Pass'){
+                        echo "Error en la contraseña. Debe ser mayor a 5 caracteres".'</strong>';
+                    }
+                }
+            }
+        ?>
+    </body>
+</html>
